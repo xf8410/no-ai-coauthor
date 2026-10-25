@@ -1,0 +1,20 @@
+#!/bin/sh
+# no-ai-coauthor —— commit-msg hook：AI 塞的署名直接剥掉，commit 照常过
+# 覆盖：Claude Code / Gemini CLI / GitHub Copilot / ChatGPT / Cursor
+# 装法：bash install.sh（或手动拷到 <repo>/.git/hooks/commit-msg 并 chmod +x）
+f="$1"
+[ -f "$f" ] || exit 0
+
+sed -E \
+  -e '/^[[:space:]]*(🤖[[:space:]]*)?Generated with( \[)?(Claude|Gemini|Copilot|ChatGPT|GPT|Cursor)/Id' \
+  -e '/^Co-Authored-By:[[:space:]]*(Claude|Gemini|GitHub Copilot|Copilot|ChatGPT|GPT-|Cursor)/Id' \
+  -e '/^Co-Authored-By:.*(noreply@anthropic\.com|noreply@google\.com|noreply@openai\.com)/Id' \
+  "$f" > "$f.nac.tmp" && mv "$f.nac.tmp" "$f"
+
+# 去尾部空行（剥完常留一堆空行）
+if [ -s "$f" ]; then
+  printf '%s\n' "$(cat "$f")" > "$f.nac.tmp" && mv "$f.nac.tmp" "$f"
+else
+  : > "$f"
+fi
+exit 0
