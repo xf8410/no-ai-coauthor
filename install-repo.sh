@@ -7,7 +7,7 @@ cd "$DIR"
 [ -d .git ] || { echo "✗ 不是 git 仓库: $DIR"; exit 1; }
 mkdir -p .github/workflows scripts
 BASE="https://raw.githubusercontent.com/xf8410/no-ai-coauthor/main"
-curl -fsSL "$BASE/workflows/no-ai-coauthor.yml" -o .github/workflows/no-ai-coauthor.yml
+curl -fsSL "$BASE/.github/workflows/no-ai-coauthor.yml" -o .github/workflows/no-ai-coauthor.yml
 curl -fsSL "$BASE/scripts/scan.sh" -o scripts/scan.sh
 chmod +x scripts/scan.sh
 echo "✓ 已装：.github/workflows/no-ai-coauthor.yml + scripts/scan.sh"
