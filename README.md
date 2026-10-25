@@ -33,7 +33,7 @@ GitHub 会在 commit 页给它挂头像徽章，等于**花钱给 AI 打广告�
 
 ```
 your-repo/
-├── .github/workflows/no-ai-coauthor.yml   ← 从本仓 workflows/ 拷
+├── .github/workflows/no-ai-coauthor.yml   ← 从本仓 .github/workflows/ 拷
 └── scripts/scan.sh                        ← 从本仓 scripts/ 拷
 ```
 
